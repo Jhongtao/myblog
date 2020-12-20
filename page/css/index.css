@@ -11,8 +11,6 @@
 }
 .content .con .con_left {
   width: 66%;
-  height: 100%;
-  border: 1px solid blue;
 }
 .con_left .samestyle {
   padding: 19px;
@@ -75,14 +73,75 @@
 
 .content .con .con_right {
   width: 33%;
-  height: 100%;
-  border: 1px solid rebeccapurple;
+  margin-left: 20px;
 }
-.con .left_pubic {
+.con_right .left_public {
   border-color: #191818;
   margin-bottom: 20px;
   background-color: #1f1f1f;
   border: 1px solid transparent;
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.left_public > h3 {
+  background-color: #191818;
+  border-color: #191818;
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  animation: right_title 4s infinite linear;
+}
+@keyframes right_title {
+  0% {
+    color: springgreen;
+  }
+  50% {
+    color: rebeccapurple;
+  }
+  80% {
+    color: salmon;
+  }
+  100% {
+    color: springgreen;
+  }
+}
+.con_right .tag {
+  margin-top: 30px;
+}
+.tag div {
+  padding: 15px;
+}
+.left_public ul {
+  border-width: 1px 0;
+  border-radius: 0;
+}
+.left_public li > a {
+  color: #eee;
+}
+.left_public li {
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #1f1f1f;
+  border: 1px solid #292929;
+}
+.left_public.comment li {
+  padding: 0 15px;
+}
+.comment li h3 {
+  display: flex;
+  justify-content: space-between;
+  color: #eee;
+  margin-bottom: 10px;
+}
+.comment li p {
+  color: #777;
+}
+.link li {
+  color: #eee;
+  display: flex;
+  justify-content: space-around;
+}
+.link li span {
+  flex-grow: 1;
 }
