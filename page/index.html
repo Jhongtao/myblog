@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/init.css">
     <link rel="stylesheet" href="./css/header-fotter.css">
     <link rel="stylesheet" href="./css/index.css">
+    <script sync src="./js/Vue.js"></script>
     <title>蒋洪涛个人博客</title>
 </head>
 
@@ -30,197 +31,30 @@
     </header>
     <div class="content">
         <div class="con">
-            <div class="con_left">
-                <div class="everyday samestyle">
+            <div class="con_left" id="blog_main">
+                <div class="everyday samestyle" >
                     <span>每日一句(20201214)</span>
-                    <p>Everyday  web technologys updated for everyone</p>
+                    <p>{{say}}</p>
                     <p>这是一个关于web技术站。
                         <span>———— J hong tao</span>
                     </p>
                 </div>
-                <ul>
-                    <li class="blog_ist">
-                        <div class="samestyle">
-                            <h2 class="title"><a href="#">Vue全栈开发</a></h2>
-                            <p>
-                                Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。
-                                与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，
-                                不仅易于上手，还便于与第三方库或既有项目整合。另一方面，
-                                当与现代化的工具链以及各种支持类库结合使用时，
-                                Vue 也完全能够为复杂的单页应用提供驱动。
-                                Vue 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，
-                                Vue 被设计为可以自底向上逐层应用，专注于声明式渲染视图层，
-                                结合丰富的生态系统和核心插件，致力于简单灵活快速驱动SPA、MPA等大小型应用。
-                            
-                            </p>
-                        </div>
-                        <div class="fotter"><span>发布于2020-12-14 |  浏览：79 | Tags：</span><a href=""></a><a href=""></a></div>
-                    </li>
-                    <li class="blog_ist">
-                        <div class="samestyle">
-                            <h2 class="title"><a href="#">Vue全栈开发</a></h2>
-                            <p>
-                                Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。
-                                与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，
-                                不仅易于上手，还便于与第三方库或既有项目整合。另一方面，
-                                当与现代化的工具链以及各种支持类库结合使用时，
-                                Vue 也完全能够为复杂的单页应用提供驱动。
-                                Vue 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，
-                                Vue 被设计为可以自底向上逐层应用，专注于声明式渲染视图层，
-                                结合丰富的生态系统和核心插件，致力于简单灵活快速驱动SPA、MPA等大小型应用。
-                            
-                            </p>
-                        </div>
-                        <div class="fotter"><span>发布于2020-12-14 |  浏览：79 | Tags：</span><a href=""></a><a href=""></a></div>
-                    </li>
-                    <li class="blog_ist">
-                        <div class="samestyle">
-                            <h2 class="title"><a href="#">Vue全栈开发</a></h2>
-                            <p>
-                                Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。
-                                与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，
-                                不仅易于上手，还便于与第三方库或既有项目整合。另一方面，
-                                当与现代化的工具链以及各种支持类库结合使用时，
-                                Vue 也完全能够为复杂的单页应用提供驱动。
-                                Vue 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，
-                                Vue 被设计为可以自底向上逐层应用，专注于声明式渲染视图层，
-                                结合丰富的生态系统和核心插件，致力于简单灵活快速驱动SPA、MPA等大小型应用。
-                            
-                            </p>
-                        </div>
-                        <div class="fotter"><span>发布于2020-12-14 |  浏览：79 | Tags：</span><a href=""></a><a href=""></a></div>
-                    </li>
-                    <li class="blog_ist">
-                        <div class="samestyle">
-                            <h2 class="title"><a href="#">Vue全栈开发</a></h2>
-                            <p>
-                                Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。
-                                与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，
-                                不仅易于上手，还便于与第三方库或既有项目整合。另一方面，
-                                当与现代化的工具链以及各种支持类库结合使用时，
-                                Vue 也完全能够为复杂的单页应用提供驱动。
-                                Vue 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，
-                                Vue 被设计为可以自底向上逐层应用，专注于声明式渲染视图层，
-                                结合丰富的生态系统和核心插件，致力于简单灵活快速驱动SPA、MPA等大小型应用。
-                            
-                            </p>
-                        </div>
-                        <div class="fotter"><span>发布于2020-12-14 |  浏览：79 | Tags：</span><a href=""></a><a href=""></a></div>
-                    </li>
-                </ul>
+                <div>
+                    <blog-list v-bind:bloglist="bloglist"></blog-list>
+                </div>
             </div>
-            <div class="con_right">
+            <div class="con_right" id="base_left">
                 <div class="tag left_public">
                     <h3>随机云标签</h3>
-                    <div>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                    </div>
+                    <random-tag v-bind:taglist="taglist"></random-tag>
                 </div>
                 <div class="hot left_public">
                     <h3>最近热门</h3>
-                    <ul>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                    </ul>
+                     <hot-list v-bind:hotlist="hotlist"></hot-list>
                 </div>
                 <div class="comment left_public">
                     <h3>最新评论</h3>
-                    <ul>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                    </ul>
+                    <comment-list v-bind:commentlist="commentlist"></comment-list>
                 </div>
                 <div class="link left_public">
                     <h3>友情链接</h3>
@@ -272,5 +106,6 @@
         </p>
     </footer>
 </body>
-
+<script src="./js/index.js"></script>
+<script src="./js/baseLeft.js"></script>
 </html>

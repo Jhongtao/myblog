@@ -57,18 +57,22 @@
   margin-left: 5px;
   content: "\e122";
 }
-.con_left .blog_ist {
+.con_left .blog_list {
   margin: 0px 0px 20px 0px;
   border: 1px solid transparent;
   border-radius: 4px;
   border-color: #bfbfbf #8e8e8e #5f5f5f #bfbfbf;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
-.blog_ist .fotter {
+.blog_list .fotter {
   color: #eee;
   border-top: #bfbfbf;
   background-color: #1f1f1f;
   padding: 5px 15px;
+}
+.blog_list .fotter a {
+  padding: 0;
+  padding-left: 6px;
 }
 
 .content .con .con_right {

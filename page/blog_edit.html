@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蒋洪涛blog编辑</title>
+</head>
+<style>
+    * {
+        outline-style: none;
+    }
+    
+    h3.title {
+        text-align: center;
+        font-size: 25px;
+    }
+    
+    .blog_tag {
+        margin-bottom: 20px;
+    }
+    
+    .blog_tag input:nth-of-type(1) {
+        width: 250px;
+    }
+    
+    .blog_tag input {
+        height: 30px;
+        padding-left: 10px;
+        margin-right: 10px;
+        border-radius: 3px;
+    }
+    
+    .btn {
+        text-align: center;
+        margin-top: 10px;
+    }
+    
+    button#btn {
+        height: 40px;
+        width: 150px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        color: rgb(51, 50, 50);
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <h3 class="title">《发表博客文章》</h3>
+    <div class="blog_tag">
+        <input type="text" placeholder="文章标题">
+        <input type="text" placeholder="tag标签用逗号隔开">
+    </div>
+    <div id="blog_edit">
+    </div>
+    <div class="btn">
+        <button type="submit" id="btn">提交</button>
+    </div>
+
+</body>
+<script src="./js/wangEditor.min.js"></script>
+<script>
+    var E = window.wangEditor
+    var editor = new E('#blog_edit')
+    editor.create()
+    document.getElementById('btn').addEventListener('click', function() {
+        // 读取 html
+        alert(editor.txt.html())
+    }, false)
+</script>
+
+</html>
