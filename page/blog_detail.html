@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/init.css">
     <link rel="stylesheet" href="./css/header-fotter.css">
     <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="./css/turnpage.css">
+    <link rel="stylesheet" href="./css/blog-detail.css">
     <script sync src="./js/Vue.js"></script>
     <title>蒋洪涛个人博客</title>
 </head>
@@ -32,15 +32,8 @@
     </header>
     <div class="content">
         <div class="con">
-            <div class="con_left" id="blog_main">
-                <div class="everyday samestyle">
-                    <span>每日一句(20201214)</span>
-                    <div v-html="say"></div>
-                </div>
-                <div>
-                    <blog-list v-bind:bloglist="bloglist"></blog-list>
-                </div>
-                <turn-page v-on:get-blog-list="getBlogList" v-bind:pagelist="pagelist"></turn-page>
+            <div class="con_left" id="blog_detail">
+                <Detail v-bind:detail="detail"></Detail>
             </div>
             <div class="con_right" id="base_left">
                 <div class="tag left_public">
@@ -106,7 +99,7 @@
     </footer>
 </body>
 <script src="./js/axios.js"></script>
-<script src="./js/index.js"></script>
+<script src="./js/blogDetail.js"></script>
 <script src="./js/baseLeft.js"></script>
 
 </html>

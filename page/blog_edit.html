@@ -50,8 +50,8 @@
 <body>
     <h3 class="title">《发表博客文章》</h3>
     <div class="blog_tag">
-        <input type="text" placeholder="文章标题">
-        <input type="text" placeholder="tag标签用逗号隔开">
+        <input type="text" id="inp_title" placeholder="文章标题" value="">
+        <input type="text" id="inp_tag" placeholder="tag标签用逗号隔开" value="">
     </div>
     <div id="blog_edit">
     </div>
@@ -60,14 +60,29 @@
     </div>
 
 </body>
+<script src="./js/axios.js"></script>
 <script src="./js/wangEditor.min.js"></script>
 <script>
     var E = window.wangEditor
     var editor = new E('#blog_edit')
     editor.create()
     document.getElementById('btn').addEventListener('click', function() {
-        // 读取 html
-        alert(editor.txt.html())
+        // 读取 html alert(editor.txt.html())
+        let content = editor.txt.html()
+        axios.post('/edit/blog', {
+                title: inp_title.value,
+                tags: inp_tag.value,
+                content: content
+            })
+            .then(function(response) {
+                inp_title.value = "";
+                inp_tag.value = "";
+                editor.txt.html('');
+                alert('发表成功')
+            })
+            .catch(function(error) {
+                alter('发表失败')
+            });
     }, false)
 </script>
 

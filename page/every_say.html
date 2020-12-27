@@ -56,14 +56,28 @@
     </div>
 
 </body>
+<script src="./js/axios.js"></script>
 <script src="./js/wangEditor.min.js"></script>
 <script>
     var E = window.wangEditor
     var editor = new E('#blog_edit')
     editor.create()
     document.getElementById('btn').addEventListener('click', function() {
-        // 读取 html
-        alert(editor.txt.html())
+        // 读取 html editor.txt.html
+        let everysay = editor.txt.html()
+        axios.post('/edit/everyday', {
+                content: everysay
+            })
+            .then(function(res) {
+                alert('发表成功')
+                editor.txt.html('')
+            }).catch(function(err) {
+                alert('发表失败')
+            })
+            // .catch(function(error) {
+            //     console.log(error);
+            // });
+
     }, false)
 </script>
 

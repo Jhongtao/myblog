@@ -1,0 +1,26 @@
+.well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    box-shadow: 1px 1px 5px rgba(97, 97, 97, .48)
+}
+
+.well a {
+    color: #337ab7;
+    text-decoration: none;
+    padding: 0;
+}
+
+.well p {
+    margin: 0 0 10px;
+}
+
+.well hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #b9b9b9;
+}
