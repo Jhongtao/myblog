@@ -101,7 +101,7 @@ function insert_blogid_tagid(tagid, blogid) {
 }
 //展示文章列表
 function showBlogList(params, callback) {
-    let sql = 'select * from blog limit ?,?';
+    let sql = 'select * from blog order by id desc limit ?,?';
     let param = [params.page, params.pageEnd];
     // console.log(params)
     const connect = createConnect.connectMysql();
@@ -140,11 +140,54 @@ function blogDetail(id, callback) {
     })
     connect.end()
 }
+//发表评论
+function publishComment(params, callback) {
+    let sql = `insert into comments(blogid,parent,parent_name,user_name,comments,email,ctime,utime) values(?,?,?,?,?,?,?,?)`;
+    const connect = createConnect.connectMysql();
+    let paramArr = [params.blogid, params.parent, params.parent_name, params.user_name, params.comment, params.email, getNow(), getNow()]
+    connect.query(sql, paramArr, function(err, result) {
+        if (err) {
+            callback(msg.resultApi(403, err))
+        } else {
+            callback(msg.resultApi(200, result))
+        }
+    })
+    connect.end()
+}
+//展示评论
+function showCommentList(blogid, callback) {
+    let sql = `select * from comments where blogid = ? order by id desc`;
+    const connect = createConnect.connectMysql();
+    connect.query(sql, parseInt(blogid), function(err, result) {
+        if (err) {
+            callback(msg.resultApi(403, err))
+        } else {
+            callback(msg.resultApi(200, result))
+        }
+    })
+    connect.end()
+}
+//获取标签
+function showTags(callback) {
+    let sql = `select * from tags`;
+    const connect = createConnect.connectMysql();
+    connect.query(sql, function(err, result) {
+        if (err) {
+            callback(msg.resultApi(403, err))
+        } else {
+            callback(msg.resultApi(200, result))
+        }
+    })
+    connect.end()
+}
 module.exports = {
     editEveryDay,
     showEveryDay,
     publishBlog,
     showBlogList,
     showBlogTotal,
-    blogDetail
+    blogDetail,
+    publishComment,
+    showCommentList,
+    showTags
 }

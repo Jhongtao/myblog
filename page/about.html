@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,233 +9,68 @@
     <link rel="stylesheet" href="css/about.css">
     <title>关于|蒋洪涛个人博客</title>
 </head>
+<script src="./js/Vue.js"></script>
+<script src="./js//axios.js"></script>
+
 <body>
     <header>
         <nav>
-                <div class="list">
-                    <a href="#">蒋洪涛个人博客 | web前端</a>
-                    <ul>
-                        <li><a href="./index.html">首页</a></li>
-                        <li><a href="./map.html">地图</a></li>
-                        <li><a href="./about.html">关于</a></li>
-                        <li><a href="./message.html">留言</a></li>
-                    </ul>
-                </div>
-                <div class="serbar">
-                    <input type="text" placeholder="输入关键词查询">
-                    <button>搜索</button>
-                </div>
-            </nav>
+            <div class="list">
+                <a href="#">蒋洪涛个人博客 | web前端</a>
+                <ul>
+                    <li><a href="./index.html">首页</a></li>
+                    <li><a href="./map.html">地图</a></li>
+                    <li><a href="./about.html">关于</a></li>
+                    <li><a href="./message.html">留言</a></li>
+                </ul>
+            </div>
+            <div class="serbar">
+                <input type="text" placeholder="输入关键词查询">
+                <button>搜索</button>
+            </div>
+        </nav>
     </header>
     <div class="content">
         <div class="con">
             <div class="con_left">
-               <div class="about_blog">
-                   <h2>关于我</h2>
-                   <hr>
-                       <p>
-                           <span>博主</span>
-                           <a href="#">洪涛</a>
-                           <span>，高大上帅气年轻小伙。</span>
-                       </p>
-                       <p>
-                        会修电脑的野生程序员<br>
-                        内向闷骚老司机<br>
-                        喜欢逛B站<br>
-                        7年web前端开发<br>
-                        javascript是世界上最好的语言
-                       </p>  
+                <div class="about_blog">
+                    <h2>关于我</h2>
+                    <hr>
+                    <p>
+                        <span>博主</span>
+                        <a href="#">洪涛</a>
+                        <span>，高大上帅气年轻小伙。</span>
+                    </p>
+                    <p>
+                        会修电脑的野生程序员<br> 内向闷骚老司机
+                        <br> 喜欢逛B站
+                        <br> 7年web前端开发
+                        <br> javascript是世界上最好的语言
+                    </p>
                     <h2>关于博客</h2>
-                   <hr>
-                       <p>
-                        从2010年 – 今<br>
-                        博主很懒+词穷，佛系更新…<br>
-                        域名 jht.com<br>
-                        程序 vue+node+js<br>
-                        服务器 免费空间 -> 国内某收费空间 -> 国外vps -> 阿里云<br>
-                       </p>                  
-               </div>
-               <div class="comment">
-                   <h3>关于：目前有79 条留言</h3>
-                   <div class="comment_list">
-                       <div class="autor">
-                           <img src="./img/autor.jpg" alt="">
-                           <strong>jht</strong>
-                           <span>发表于 2020年10月21日 21:10<a href="#">"回复"</a></span>
-                       </div>
-                       <p>膜拜大佬，请问在github上有开源项目吗</p>
-                   </div>
-                   <div class="comment_list">
-                    <div class="autor">
-                        <img src="./img/autor.jpg" alt="">
-                        <strong>jht</strong>
-                        <span>发表于 2020年10月21日 21:10<a href="#">"回复"</a></span>
-                    </div>
-                    <p>膜拜大佬，请问在github上有开源项目吗</p>
-                    <div class="children">
-                        <div class="comment_list">
-                            <div class="autor">
-                                <img src="./img/autor.jpg" alt="">
-                                <strong>jht</strong>
-                                <span>发表于 2020年10月21日 21:10<a href="#">"回复"</a></span>
-                            </div>
-                            <p>膜拜大佬，请问在github上有开源项目吗</p>
-                        </div>
-                    </div>
-                   </div>
-                   <div class="comment_list">
-                    <div class="autor">
-                        <img src="./img/autor.jpg" alt="">
-                        <strong>jht</strong>
-                        <span>发表于 2020年10月21日 21:10<a href="#">"回复"</a></span>
-                    </div>
-                    <p>膜拜大佬，请问在github上有开源项目吗</p>
-                    <div class="children">
-                        <div class="comment_list">
-                            <div class="autor">
-                                <img src="./img/autor.jpg" alt="">
-                                <strong>jht</strong>
-                                <span>发表于 2020年10月21日 21:10<a href="#">"回复"</a></span>
-                            </div>
-                            <p>膜拜大佬，请问在github上有开源项目吗</p>
-                            <div class="children">
-                                <div class="comment_list">
-                                    <div class="autor">
-                                        <img src="./img/autor.jpg" alt="">
-                                        <strong>jht</strong>
-                                        <span>发表于 2020年10月21日 21:10<a href="#">"回复"</a></span>
-                                    </div>
-                                    <p>膜拜大佬，请问在github上有开源项目吗</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   </div>
-               </div>
-               <div class="comment_from">
-                   <h3>发表评论</h3>
-                   <div class="from_init">
-                       <from>
-                           <div><input class="from_control" type="text" placeholder="昵称"><input class="from_control" placeholder="邮箱回复信息" type="text"></div>
-                           <div><textarea class="from_control" name="" id="" cols="60" rows="5" placeholder="无意义内容不可恢复"></textarea></div>
-                           <div><input class="from_control" type="text" placeholder="验证码"></div>
-                           <div><button class="from_control">提交留言</button><button class="from_control">重写</button></div>
-                       </from>
-                   </div>
-               </div>
+                    <hr>
+                    <p>
+                        从2010年 – 今<br> 博主很懒+词穷，佛系更新…
+                        <br> 域名 jht.com<br> 程序 vue+node+js<br> 服务器 免费空间 -> 国内某收费空间 -> 国外vps -> 阿里云<br>
+                    </p>
+                </div>
+                <div class="comment" id="comment_about">
+                    <comment-content v-bind:comment-list="commentlist" v-on:parent-comment="parentComment"></comment-content>
+                    <edit-comment v-on:get-svg="getSvg" v-on:submit-comment="submitComment" v-bind:svg-code="svgCode"></edit-comment>
+                </div>
             </div>
-            <div class="con_right">
+            <div class="con_right" id="base_left">
                 <div class="tag left_public">
                     <h3>随机云标签</h3>
-                    <div>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                        <a href="#">随机取数</a>
-                    </div>
+                    <random-tag v-bind:taglist="taglist"></random-tag>
                 </div>
                 <div class="hot left_public">
                     <h3>最近热门</h3>
-                    <ul>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                        <li><a href="#">web前端</a></li>
-                    </ul>
+                    <hot-list v-bind:hotlist="hotlist"></hot-list>
                 </div>
                 <div class="comment left_public">
                     <h3>最新评论</h3>
-                    <ul>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>标题</span>
-                                    <sapn>时间</sapn>
-                                </h3>
-                                <p>内容</p>
-                            </div>
-                        </li>
-                    </ul>
+                    <comment-list v-bind:commentlist="commentlist"></comment-list>
                 </div>
                 <div class="link left_public">
                     <h3>友情链接</h3>
@@ -248,37 +84,37 @@
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
     <footer>
         <ul>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
-             <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
+            <li><a href="#">'链接地址'</a></li>
         </ul>
         <p>
             <span>Copyright © 2010-2020 蒋洪涛人博客 All rights reserved. 由免费开源的WordPress强力驱动.</span>
@@ -286,4 +122,148 @@
         </p>
     </footer>
 </body>
+<script src="./js/baseLeft.js"></script>
+<script>
+    const commentContent = {
+        name: "commentContent",
+        props: ['commentList'],
+        template: `
+    <div class="comment">
+    <h3>关于这篇文章：目前有{{commentList.length}}条留言</h3>
+    <div class="comment_list" v-for="comments in commentList">
+        <div class="autor">
+            <img src="./img/autor.jpg" alt="">
+            <strong>{{comments.user_name}}</strong>
+            <span>{{comments.parent==-1?'发表于':'回复: '+comments.parent_name}} {{comments.ctime}}<a href="#comment_form" @click="$emit('parent-comment',{id:comments.id,user_name:comments.user_name})">"回复"</a></span>
+        </div>
+        <p>{{comments.comments}}</p>
+        <div class="children" style="display:none">
+            <div class="comment_list">
+            <div class="autor">
+              <img src="./img/autor.jpg" alt="">
+              <strong>{{comments.user_name}}</strong>
+              <span>发表于 {{comments.ctime}}<a href="#comment_form" @click="$emit('parent-comment',{id:comments.id,user_name:comments.user_name})">"回复"</a></span>
+           </div>
+           <p>{{comments.comments}}</p>
+                <div class="children">
+                    <div class="comment_list">
+                        <div class="autor">
+                            <img src="./img/autor.jpg" alt="">
+                            <strong>jht</strong>
+                            <span>发表于 2020年10月21日 21:10<a href="#">"回复"</a></span>
+                        </div>
+                        <p>膜拜大佬，请问在github上有开源项目吗</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+`
+    }
+    const editComment = {
+        data() {
+            return {}
+        },
+        methods: {
+            submitcomment() {
+                this.$emit('submit-comment')
+            },
+        },
+        props: ['svgCode'],
+        name: "editComment",
+        template: `
+<div id="comment_form" class="comment_form">
+    <h3>发表评论</h3>
+    <div class="form_init" >
+    <div><input id="parentId" name="parent" class="form_control" value=-1 placeholder="父级" type="hidden">
+    <input id="parentName" name="parent_name" class="form_control" value=0 placeholder="父级" type="hidden">
+    </div>
+    <div><input id="user_name" name="user_name" class="form_control" type="text" placeholder="昵称">
+    <input id="email" name="email" class="form_control" placeholder="邮箱回复信息" type="text"></div>
+    <div><textarea id="comment" name="comment" class="form_control" cols="60" rows="5" placeholder="无意义内容不可恢复"></textarea></div>
+    <div><input id="verification" name="verification" class="form_control" type="text" placeholder="验证码">
+    <span @click="$emit('get-svg')" v-html="svgCode.code"></span></div>
+    <div><button v-on:click="submitcomment" class="form_control">提交留言</button><button class="form_control">重写</button></div>
+    </div>
+</div>
+    `
+    }
+
+    const comment_about = new Vue({
+        data: {
+            blogid: null,
+            svgCode: {
+                text: null,
+                code: null
+            },
+            detail: {},
+            commentlist: []
+        },
+        components: {
+            commentContent,
+            editComment
+        },
+        methods: {
+            init() {
+                Promise.all([this.getCommentList(), this.getSvg()])
+            },
+            parentComment(params) {
+                parentId.value = params.id;
+                parentName.value = params.user_name;
+            },
+            getCommentList() {
+                return axios.get("show/commentlist", {
+                    params: {
+                        blogid: -1
+                    }
+                }).then(res => {
+                    this.commentlist = res.data
+                })
+            },
+            getSvg() {
+                return axios.get("show/svg").then(res => {
+                    this.svgCode.code = res.data.data;
+                    this.svgCode.text = res.data.text
+                })
+            },
+            submitComment() {
+                if (verification.value != this.svgCode.text) {
+                    alert("验证码错误");
+                    return
+                }
+                let params = {};
+                params.blogid = -1;
+                params.user_name = user_name.value;
+                params.email = email.value;
+                params.comment = comment.value;
+                params.parent = parseInt(parentId.value);
+                params.parent_name = parentName.value
+                axios.post("/edit/comment", params).then(res => {
+                    if (res.data.code == 200) {
+                        alert('发表成功');
+                        user_name.value = ""
+                        email.value = ""
+                        comment.value = ""
+                        verification.value = ""
+                        this.getSvg();
+                        this.getCommentList();
+                    } else {
+                        alert('发表失败')
+                    }
+
+                }).catch(err => {
+                    alert('发表失败')
+                })
+            }
+        },
+        created() {
+            this.blogid = params.blogid;
+            this.init();
+
+
+        }
+    }).$mount("#comment_about")
+</script>
+
 </html>

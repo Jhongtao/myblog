@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/header-fotter.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/blog-detail.css">
+    <link rel="stylesheet" href="./css/about.css">
     <script sync src="./js/Vue.js"></script>
     <title>蒋洪涛个人博客</title>
 </head>
@@ -34,6 +35,8 @@
         <div class="con">
             <div class="con_left" id="blog_detail">
                 <Detail v-bind:detail="detail"></Detail>
+                <comment-content v-bind:comment-list="commentlist" v-on:parent-comment="parentComment"></comment-content>
+                <edit-comment v-on:get-svg="getSvg" v-on:submit-comment="submitComment" v-bind:svg-code="svgCode"></edit-comment>
             </div>
             <div class="con_right" id="base_left">
                 <div class="tag left_public">

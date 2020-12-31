@@ -67,18 +67,7 @@
       },
       methods: {
           init() {
-              this.getEveryDay();
-              this.getBlogList();
-              this.getBlogTotal();
-          },
-          getBlogList() {
-              axios.get("/show/bloglist", { params: { page: (this.page - 1) * this.pageSize, pageEnd: (this.page - 1) * this.pageSize + this.pageSize } }).then(res => {
-                  this.bloglist = res.data
-              })
-          },
-          getBlogTotal() {
-              axios.get("/show/blogtotal").then(res => {
-                  this.total = res.data[0].total;
+              Promise.all([this.getEveryDay(), this.getBlogList(), this.getBlogTotal()]).then(res => {
                   this.pagelist = {
                       total: this.total,
                       size: this.pageSize,
@@ -87,10 +76,21 @@
                   }
               })
           },
+          getBlogList() {
+              return axios.get("/show/bloglist", { params: { page: (this.page - 1) * this.pageSize, pageEnd: (this.page - 1) * this.pageSize + this.pageSize } }).then(res => {
+                  this.bloglist = res.data
+              })
+          },
+          getBlogTotal() {
+              return axios.get("/show/blogtotal").then(res => {
+                  this.total = res.data[0].total;
+              })
+          },
           getEveryDay() {
-              axios.get("/show/everyday").then(res => {
+              return axios.get("/show/everyday").then(res => {
                   let data = res.data;
-                  this.say = data.msg.content
+                  this.say = data.msg.content;
+                  Promise.resolve('success')
               })
           }
       },

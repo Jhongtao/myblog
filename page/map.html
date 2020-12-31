@@ -1,43 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>站点地图-蒋洪涛个人博客</title>
     <link rel="stylesheet" href="./css/map.css">
 </head>
+<script src="./js/Vue.js"></script>
+<script src="./js/axios.js"></script>
+
 <body>
     <header>
         <h2>蒋洪涛个人博客's Site Map</h2>
     </header>
     <section>
         <div class="map_nav map_public">
-            <p><strong>蒋洪涛个人博客</strong><span>»</span><span>站点地图</span></p>
+            <p><a href="./index.html"><strong>蒋洪涛个人博客</strong></a><span>»</span><span>站点地图</span></p>
         </div>
         <div class="article_list map_public">
             <h3>最新文章</h3>
-            <ul>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-               <li><a href="#">web前端</a></li>
-            </ul>
+            <div id="article_list">
+                <map-list v-bind:maplist="maplist"></map-list>
+            </div>
         </div>
         <div class="map_info map_public">
             <p>
@@ -59,4 +44,46 @@
         </div>
     </footer>
 </body>
+<script>
+    const mapList = {
+        data() {
+            return {}
+        },
+        props: ['maplist'],
+        template: `
+        <ul>
+          <li v-for="map in maplist"><a :href="'./blog_detail.html?blogid='+map.id">{{map.title}}</a></li>
+        </ul>
+        `
+    };
+    const articleList = new Vue({
+        data: {
+            maplist: []
+        },
+        components: {
+            mapList
+        },
+        methods: {
+            getMapList() {
+                axios.get('/show/bloglist', {
+                    params: {
+                        page: 0,
+                        pageEnd: 50
+                    }
+                }).then(res => {
+                    this.maplist = res.data.map(ele => {
+                        return {
+                            title: ele.title,
+                            id: ele.id
+                        }
+                    })
+                })
+            }
+        },
+        created() {
+            this.getMapList()
+        }
+    }).$mount("#article_list")
+</script>
+
 </html>

@@ -16,4 +16,9 @@ router.post('/blog', function(req, res) {
         res.status(result.code).send(result)
     })
 })
+router.post("/comment", function(req, res) {
+    controlDb.publishComment(req.body, function(result) {
+        res.status(result.code).send(result)
+    })
+})
 module.exports = router

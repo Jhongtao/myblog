@@ -1,49 +1,49 @@
-
-function randomColor(){
-    let red=Math.random()*255
-    let blue=Math.random()*255
-    let yellow=Math.random()*255
+function randomColor() {
+    let red = Math.random() * 255
+    let blue = Math.random() * 255
+    let yellow = Math.random() * 255
     return `rgb(${red},${blue},${yellow})`
 }
-function randomFontsize(){
-    let size=Math.random()*18+12+'px'
+
+function randomFontsize() {
+    let size = Math.random() * 18 + 12 + 'px'
     return size
 }
 const randomTag = {
-    props:['taglist'],
-    computed:{
-        randomcolor(){
+    props: ['taglist'],
+    computed: {
+        randomcolor() {
             return randomColor
         },
-        randomsize(){
+        randomsize() {
             return randomFontsize
         }
     },
-    template:`<div>
-    <a v-for="(tag,index) in taglist" :key="index" href="#" v-bind:style="{color:randomcolor(),fontSize:randomsize()}">
-    {{tag}}
+    template: `<div>
+    <a v-for="(item,index) in taglist" :key="index" href="#" v-bind:style="{color:randomcolor(),fontSize:randomsize()}">
+    {{item.tag}}
     </a>
     </div>`
 }
 const hotList = {
-    props:['hotlist'],
-    template:`
+    props: ['hotlist'],
+    template: `
     <ul>
     <li v-for="(hot,index) in hotlist" :key="index">
-    <a href="#">{{hot}}</a>
+    <a :href="'./blog_detail.html?blogid='+hot.blogid">{{hot.title}}</a>
     </li>
     </ul>
     `
 }
 const commentList = {
-    props:['commentlist'],
-    template:`
+    props: ['commentlist'],
+    template: `
     <ul>
     <li v-for="(comment,index) in commentlist">
     <div>
     <h3>
-        <span>{{comment.title}}</span>
-        <span>{{comment.time}}</span>
+        <span>{{comment.comments}}</span>
+        <span>{{comment.ctime}}</span>
     </h3>
     <p>{{comment.content}}</p>
     </div>
@@ -52,36 +52,59 @@ const commentList = {
     `
 }
 const baseLef = new Vue({
-    el:'#base_left',
-    data:{
-        taglist:['Java','Web前端','PHP','node','phyton','Javascript','Vue-cli','Vue3.0','react','微信小程序','H5页面','移动端开发','uni-app','phyton','Javascript','Vue-cli','Vue3.0','react','微信小程序','H5页面','移动端开发','uni-app'],
-        hotlist:['Java','Web前端','PHP','node','phyton','Javascript','Vue-cli','Vue3.0','react','微信小程序'],
-        commentlist:[{
-            title:'啊啊啊',
-            time:'2天前',
-            content:'nice 点个赞'
-        },
-        {
-            title:'啊啊啊',
-            time:'2天前',
-            content:'nice 点个赞'
-        },
-        {
-            title:'啊啊啊',
-            time:'2天前',
-            content:'nice 点个赞'
-        },
-        {
-            title:'啊啊啊',
-            time:'2天前',
-            content:'nice 点个赞'
-        }
-
-    ]
+    el: '#base_left',
+    data: {
+        taglist: [],
+        hotlist: [],
+        commentlist: []
     },
-    components:{
+    components: {
         randomTag,
         hotList,
         commentList
+    },
+    methods: {
+        getTags() {
+            return axios.get("/show/tags").then(res => {
+                this.taglist = res.data.map(ele => {
+                    return {
+                        tag: ele.tag,
+                        tagid: ele.id
+
+                    }
+                }).sort(() => Math.random() - 0.5)
+            })
+        },
+        getTitles() {
+            return axios.get("/show/bloglist", {
+                params: {
+                    page: 0,
+                    pageEnd: 10
+                }
+            }).then(res => {
+                this.hotlist = res.data.reverse().map(ele => {
+                    return {
+                        title: ele.title,
+                        blogid: ele.id
+
+                    }
+                })
+            })
+        },
+        getComments() {
+            return axios.get("/show/commentlist", {
+                params: {
+                    blogid: -2
+                }
+            }).then(res => {
+                this.commentlist = res.data.reverse().splice(0, 5)
+            })
+        },
+        init() {
+            Promise.all([this.getTags(), this.getTitles(), this.getComments()])
+        }
+    },
+    created() {
+        this.init()
     }
 })
