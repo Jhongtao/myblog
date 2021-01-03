@@ -1,8 +1,9 @@
 const mysql = require('mysql');
+const globalBase = require("../config")
 
 function connectMysql() {
     const connect = mysql.createConnection({
-        host: "192.168.1.144",
+        host: globalBase.baseUrl,
         port: "3306",
         user: "root",
         password: "root",

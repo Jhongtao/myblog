@@ -20,7 +20,7 @@ const ser_bar = new Vue({
     },
     methods: {
         navTo(val) {
-            location.href = "http://localhost:12306/index.html?serval=" + val
+            location.href = "./index.html?serval=" + val
         }
     },
     created() {
