@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const svgCaptcha = require("svg-captcha");
-const controlDb = require('../dao/controlDb')
+const controlDb = require('../dao/controlDb');
 
 router.get("/everyday", function(req, res) {
     controlDb.showEveryDay(function(result) {
-        res.status(result.code).send(result)
+        res.status(result.code).send(result.msg)
     })
 })
 router.get("/bloglist", function(req, res) {
     let params = req.query
-    controlDb.showBlogList({ page: parseInt(params.page), pageEnd: parseInt(params.pageEnd) }, function(result) {
+    controlDb.showBlogList({ page: parseInt(params.page), size: parseInt(params.size) }, function(result) {
         var bloglist = result.msg;
         bloglist = bloglist.filter(function(ele) {
             return ele.content = ele.content.replace(/<[^>]*>/g, '').substr(0, 200) + '...'
@@ -46,6 +46,51 @@ router.get("/commentlist", function(req, res) {
 })
 router.get("/tags", function(req, res) {
     controlDb.showTags(function(result) {
+        res.status(result.code).send(result.msg)
+    })
+})
+router.get("/gettagblogs", function(req, res) {
+    let params = req.query
+    controlDb.showTagBlogs({ tagid: parseInt(params.tagid), page: parseInt(params.page), size: parseInt(params.size) }, function(result) {
+        var bloglist = result.msg;
+        bloglist = bloglist.filter(function(ele) {
+            return ele.content = ele.content.replace(/<[^>]*>/g, '').substr(0, 200) + '...'
+        })
+        res.status(result.code).send(bloglist)
+    })
+})
+router.get("/hotlist", function(req, res) {
+    let params = req.query
+    controlDb.showHotList({ page: parseInt(params.page), size: parseInt(params.size) }, function(result) {
+        var bloglist = result.msg;
+        bloglist = bloglist.map(function(ele) {
+            return {
+                title: ele.title,
+                blogid: ele.id
+            }
+        })
+        res.status(result.code).send(bloglist)
+    })
+})
+router.get("/gettagblogstotal", function(req, res) {
+    let params = req.query
+    controlDb.showTagBlogsTotal(parseInt(params.tagid), function(result) {
+        res.status(result.code).send(result.msg)
+    })
+})
+router.get("/getvalblogs", function(req, res) {
+    let params = req.query
+    controlDb.showValBlogs({ value: params.value, page: parseInt(params.page), size: parseInt(params.size) }, function(result) {
+        var bloglist = result.msg;
+        bloglist = bloglist.filter(function(ele) {
+            return ele.content = ele.content.replace(/<[^>]*>/g, '').substr(0, 200) + '...'
+        })
+        res.status(result.code).send(bloglist)
+    })
+})
+router.get("/getvalblogstotal", function(req, res) {
+    let value = req.query.value
+    controlDb.showValBlogsTotal(value, function(result) {
         res.status(result.code).send(result.msg)
     })
 })

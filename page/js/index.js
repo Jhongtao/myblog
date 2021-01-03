@@ -3,6 +3,15 @@
           return {}
       },
       props: ["bloglist"],
+      methods: {
+          formatDate(time) {
+              var date = new Date(parseInt(time));
+              var year = date.getFullYear();
+              var mon = date.getMonth() + 1;
+              var day = date.getDate();
+              return year + '-' + mon + '-' + day;
+          },
+      },
       computed: {
           //   templist() {
           //       this.bloglist.push(this.bloglist[0], this.bloglist[0], this.bloglist[0])
@@ -17,7 +26,7 @@
         <p v-html='blog.content'>                        
         </p>
     </div>
-     <div class="fotter"><span>发布于{{blog.ctime}}|  浏览：{{blog.views}} | Tags:<a v-for="tags in blog.tags" v-bind:href="tags">{{tags}}</a></span></div>
+     <div class="fotter"><span>发布于{{formatDate(blog.ctime)}}|  浏览：{{blog.views}} | Tags:<a v-for="tags in blog.tags" v-bind:href="tags">{{tags}}</a></span></div>
     </li>
     </ul>`
   }
@@ -32,7 +41,14 @@
               blog_main.page = page;
               Object.assign(blog_main.pagelist, { curPage: page });
               //   blog_main.getBlogList();
-              this.$emit("get-blog-list")
+              if (!blog_main.tagid && !blog_main.serval) {
+                  this.$emit("get-blog-list")
+              } else if (blog_main.tagid) {
+                  this.$emit("get-tag-blogs", blog_main.tagid)
+              } else if (blog_main.serval) {
+                  this.$emit("get-val-blog", blog_main.serval)
+              }
+
               document.body.scrollTop = document.documentElement.scrollTop = 0
           },
           //   clickNext(page){
@@ -50,7 +66,8 @@
   const blog_main = new Vue({
       data: {
           say: "Everyday  web technologys updated for everyone",
-          pageSize: 5,
+          saydate: "",
+          pageSize: 3,
           page: 1,
           total: null,
           pagelist: {},
@@ -67,17 +84,74 @@
       },
       methods: {
           init() {
-              Promise.all([this.getEveryDay(), this.getBlogList(), this.getBlogTotal()]).then(res => {
-                  this.pagelist = {
-                      total: this.total,
-                      size: this.pageSize,
-                      curPage: this.page,
-                      isShow: this.showTurnPage
+              if (!this.tagid && !this.serval) {
+                  Promise.all([this.getEveryDay(), this.getBlogList(), this.getBlogTotal()]).then(res => {
+                      this.pagelist = {
+                          total: this.total,
+                          size: this.pageSize,
+                          curPage: this.page,
+                          isShow: this.showTurnPage
+                      }
+                  })
+              } else if (this.tagid) {
+                  Promise.all([this.getEveryDay(), this.getTagBlogs(this.tagid), this.gettagblogstotal(this.tagid)]).then(res => {
+                      this.pagelist = {
+                          total: this.total,
+                          size: this.pageSize,
+                          curPage: this.page,
+                          isShow: this.showTurnPage
+                      }
+                  })
+              } else if (this.serval) {
+                  Promise.all([this.getEveryDay(), this.getValBlogs(this.serval), this.getValBlogsTotal(this.serval)]).then(res => {
+                      this.pagelist = {
+                          total: this.total,
+                          size: this.pageSize,
+                          curPage: this.page,
+                          isShow: this.showTurnPage
+                      }
+                  })
+              }
+
+          },
+          getValBlogs(value) {
+              return axios.get("/show/getvalblogs", {
+                  params: {
+                      value,
+                      page: (this.page - 1) * this.pageSize,
+                      size: this.pageSize
                   }
+              }).then(res => {
+                  this.bloglist = res.data
               })
           },
+          getValBlogsTotal(value) {
+              return axios.get("/show/getvalblogstotal", {
+                  params: {
+                      value,
+                  }
+              }).then(res => {
+                  this.total = res.data[0].total
+              })
+          },
+          getTagBlogs(tagid) {
+              return axios.get("/show/gettagblogs", {
+                  params: {
+                      tagid,
+                      page: (this.page - 1) * this.pageSize,
+                      size: this.pageSize
+                  }
+              }).then(res => {
+                  this.bloglist = res.data
+              })
+          },
+          gettagblogstotal(tagid) {
+              return axios.get("/show/gettagblogstotal", {
+                  params: { tagid, }
+              }).then(res => this.total = res.data[0].count)
+          },
           getBlogList() {
-              return axios.get("/show/bloglist", { params: { page: (this.page - 1) * this.pageSize, pageEnd: (this.page - 1) * this.pageSize + this.pageSize } }).then(res => {
+              return axios.get("/show/bloglist", { params: { page: (this.page - 1) * this.pageSize, size: this.pageSize } }).then(res => {
                   this.bloglist = res.data
               })
           },
@@ -88,13 +162,26 @@
           },
           getEveryDay() {
               return axios.get("/show/everyday").then(res => {
-                  let data = res.data;
-                  this.say = data.msg.content;
-                  Promise.resolve('success')
+                  console.log(res)
+                  this.say = res.data.content;
+                  this.saydate = res.data.ctime
               })
-          }
+          },
+          formatDate(time) {
+              var date = new Date(parseInt(time));
+              var year = date.getFullYear();
+              var mon = date.getMonth() + 1;
+              var day = date.getDate();
+              return year + '-' + mon + '-' + day;
+          },
       },
       created() {
+          let params = {};
+          window.location.search.replace(/[?]/, '').split("@").forEach(ele => {
+              params[ele.split("=")[0]] = ele.split("=")[1]
+          });
+          this.tagid = params.tagid;
+          this.serval = params.serval;
           this.init()
       }
   }).$mount('#blog_main')

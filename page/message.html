@@ -119,6 +119,15 @@
     const commentContent = {
         name: "commentContent",
         props: ['commentList'],
+        methods: {
+            formatDate(time) {
+                var date = new Date(parseInt(time));
+                var year = date.getFullYear();
+                var mon = date.getMonth() + 1;
+                var day = date.getDate();
+                return year + '-' + mon + '-' + day;
+            },
+        },
         template: `
     <div class="comment">
     <h3>关于这篇文章：目前有{{commentList.length}}条留言</h3>
@@ -126,29 +135,10 @@
         <div class="autor">
             <img src="./img/autor.jpg" alt="">
             <strong>{{comments.user_name}}</strong>
-            <span>{{comments.parent==-1?'发表于':'回复: '+comments.parent_name}} {{comments.ctime}}<a href="#comment_form" @click="$emit('parent-comment',{id:comments.id,user_name:comments.user_name})">"回复"</a></span>
+            <span>{{comments.parent==-1?'发表于':'回复: '+comments.parent_name}} {{formatDate(comments.ctime)}}<a href="#comment_form" @click="$emit('parent-comment',{id:comments.id,user_name:comments.user_name})">"回复"</a></span>
         </div>
         <p>{{comments.comments}}</p>
-        <div class="children" style="display:none">
-            <div class="comment_list">
-            <div class="autor">
-              <img src="./img/autor.jpg" alt="">
-              <strong>{{comments.user_name}}</strong>
-              <span>发表于 {{comments.ctime}}<a href="#comment_form" @click="$emit('parent-comment',{id:comments.id,user_name:comments.user_name})">"回复"</a></span>
-           </div>
-           <p>{{comments.comments}}</p>
-                <div class="children">
-                    <div class="comment_list">
-                        <div class="autor">
-                            <img src="./img/autor.jpg" alt="">
-                            <strong>jht</strong>
-                            <span>发表于 2020年10月21日 21:10<a href="#">"回复"</a></span>
-                        </div>
-                        <p>膜拜大佬，请问在github上有开源项目吗</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 `

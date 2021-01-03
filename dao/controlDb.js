@@ -19,7 +19,7 @@ function editEveryDay(content, callback) {
 //展示-每日一句
 
 function showEveryDay(callback) {
-    let sql = "select content from everysay order by id desc"
+    let sql = "select * from everysay order by id desc"
     const connect = createConnect.connectMysql();
     connect.query(sql, function(err, result) {
         if (err) {
@@ -102,7 +102,22 @@ function insert_blogid_tagid(tagid, blogid) {
 //展示文章列表
 function showBlogList(params, callback) {
     let sql = 'select * from blog order by id desc limit ?,?';
-    let param = [params.page, params.pageEnd];
+    let param = [params.page, params.size];
+    // console.log(params)
+    const connect = createConnect.connectMysql();
+    connect.query(sql, param, function(err, result) {
+        if (err) {
+            callback(msg.resultApi(403, err))
+        } else {
+            callback(msg.resultApi(200, result))
+        }
+    })
+    connect.end()
+}
+//最新热门
+function showHotList(params, callback) {
+    let sql = 'select * from blog order by views desc limit ?,?';
+    let param = [params.page, params.size];
     // console.log(params)
     const connect = createConnect.connectMysql();
     connect.query(sql, param, function(err, result) {
@@ -135,7 +150,21 @@ function blogDetail(id, callback) {
         if (err) {
             callback(msg.resultApi(403, err))
         } else {
-            callback(msg.resultApi(200, result))
+            callback(msg.resultApi(200, result));
+            addViews(parseInt(id))
+        }
+    })
+    connect.end()
+}
+//增加阅读数
+function addViews(blogid) {
+    let sql = "update blog set views = views + 1 where id = ?"
+    const connect = createConnect.connectMysql();
+    connect.query(sql, blogid, function(err, result) {
+        if (err) {
+            console.log(err)
+        } else {
+
         }
     })
     connect.end()
@@ -180,6 +209,63 @@ function showTags(callback) {
     })
     connect.end()
 }
+//通过tapid检索blogs
+function showTagBlogs(params, callback) {
+    let sql = `select blog.id,blog.title,blog.content,blog.views,blog.tags,blog.ctime from blog right join tag_blog_mapping on blog.id = tag_blog_mapping.blogid where tag_blog_mapping.tagid = ? limit ?,?`;
+    let param = [params.tagid, params.page, params.size]
+    const connect = createConnect.connectMysql();
+    connect.query(sql, param, function(err, result) {
+        if (err) {
+            callback(msg.resultApi(403, err))
+        } else {
+            callback(msg.resultApi(200, result))
+        }
+    })
+    connect.end()
+}
+//通过tapid检索blogs篇数
+function showTagBlogsTotal(tagid, callback) {
+    let sql = `select count(*) as count from blog right join tag_blog_mapping on blog.id = tag_blog_mapping.blogid where tag_blog_mapping.tagid = ? `;
+    const connect = createConnect.connectMysql();
+    connect.query(sql, parseInt(tagid), function(err, result) {
+        if (err) {
+            callback(msg.resultApi(403, err))
+        } else {
+            callback(msg.resultApi(200, result))
+        }
+    })
+    connect.end()
+}
+//模糊查询
+function showValBlogs(params, callback) {
+    let sql = `select * from blog where title like ? limit ?,?`;
+    let param = ['%' + params.value + '%', params.page, params.size]
+    const connect = createConnect.connectMysql();
+    connect.query(sql, param, function(err, result) {
+        console.log(sql)
+        if (err) {
+            callback(msg.resultApi(403, err))
+        } else {
+            callback(msg.resultApi(200, result))
+        }
+    })
+    connect.end()
+}
+
+function showValBlogsTotal(value, callback) {
+    let sql = `select count(*) as total from blog where title like ?`;
+    let values = '%' + value + '%';
+    const connect = createConnect.connectMysql();
+    connect.query(sql, values, function(err, result) {
+        if (err) {
+            callback(msg.resultApi(403, err))
+        } else {
+            console.log(result)
+            callback(msg.resultApi(200, result))
+        }
+    })
+    connect.end()
+}
 module.exports = {
     editEveryDay,
     showEveryDay,
@@ -189,5 +275,10 @@ module.exports = {
     blogDetail,
     publishComment,
     showCommentList,
-    showTags
+    showTags,
+    showTagBlogs,
+    showHotList,
+    showTagBlogsTotal,
+    showValBlogs,
+    showValBlogsTotal
 }

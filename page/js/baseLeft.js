@@ -20,7 +20,7 @@ const randomTag = {
         }
     },
     template: `<div>
-    <a v-for="(item,index) in taglist" :key="index" href="#" v-bind:style="{color:randomcolor(),fontSize:randomsize()}">
+    <a v-for="(item,index) in taglist" :key="index" :href="'./index.html?tagid='+item.tagid" v-bind:style="{color:randomcolor(),fontSize:randomsize()}">
     {{item.tag}}
     </a>
     </div>`
@@ -37,13 +37,22 @@ const hotList = {
 }
 const commentList = {
     props: ['commentlist'],
+    methods: {
+        formatDate(time) {
+            var date = new Date(parseInt(time));
+            var year = date.getFullYear();
+            var mon = date.getMonth() + 1;
+            var day = date.getDate();
+            return year + '-' + mon + '-' + day;
+        },
+    },
     template: `
     <ul>
     <li v-for="(comment,index) in commentlist">
     <div>
     <h3>
         <span>{{comment.comments}}</span>
-        <span>{{comment.ctime}}</span>
+        <span>{{formatDate(comment.ctime)}}</span>
     </h3>
     <p>{{comment.content}}</p>
     </div>
@@ -76,19 +85,13 @@ const baseLef = new Vue({
             })
         },
         getTitles() {
-            return axios.get("/show/bloglist", {
+            return axios.get("/show/hotlist", {
                 params: {
                     page: 0,
-                    pageEnd: 10
+                    size: 5
                 }
             }).then(res => {
-                this.hotlist = res.data.reverse().map(ele => {
-                    return {
-                        title: ele.title,
-                        blogid: ele.id
-
-                    }
-                })
+                this.hotlist = res.data
             })
         },
         getComments() {

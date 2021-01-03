@@ -14,7 +14,7 @@
 
 <body>
     <header>
-        <nav>
+        <nav id="top-bar">
             <div class="list">
                 <a href="#">蒋洪涛个人博客 | web前端</a>
                 <ul>
@@ -24,23 +24,20 @@
                     <li><a href="./message.html">留言</a></li>
                 </ul>
             </div>
-            <div class="serbar">
-                <input type="text" placeholder="输入关键词查询">
-                <button>搜索</button>
-            </div>
+            <ser-bar v-on:nav-to="navTo"></ser-bar>
         </nav>
     </header>
     <div class="content">
         <div class="con">
             <div class="con_left" id="blog_main">
                 <div class="everyday samestyle">
-                    <span>每日一句(20201214)</span>
+                    <span>每日一句({{formatDate(saydate)}})</span>
                     <div v-html="say"></div>
                 </div>
                 <div>
                     <blog-list v-bind:bloglist="bloglist"></blog-list>
                 </div>
-                <turn-page v-on:get-blog-list="getBlogList" v-bind:pagelist="pagelist"></turn-page>
+                <turn-page v-on:get-val-blog="getValBlogs" v-on:get-tag-blogs="getTagBlogs" v-on:get-blog-list="getBlogList" v-bind:pagelist="pagelist"></turn-page>
             </div>
             <div class="con_right" id="base_left">
                 <div class="tag left_public">
@@ -108,5 +105,6 @@
 <script src="./js/axios.js"></script>
 <script src="./js/index.js"></script>
 <script src="./js/baseLeft.js"></script>
+<script src="./js/baseSerBar.js"></script>
 
 </html>
