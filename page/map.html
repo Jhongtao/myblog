@@ -65,12 +65,7 @@
         },
         methods: {
             getMapList() {
-                axios.get('/show/bloglist', {
-                    params: {
-                        page: 0,
-                        pageEnd: 50
-                    }
-                }).then(res => {
+                axios.get('/show/list').then(res => {
                     this.maplist = res.data.map(ele => {
                         return {
                             title: ele.title,

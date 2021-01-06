@@ -114,6 +114,20 @@ function showBlogList(params, callback) {
     })
     connect.end()
 }
+//展示所有文章
+function showList(callback) {
+    let sql = 'select * from blog';
+    // console.log(params)
+    const connect = createConnect.connectMysql();
+    connect.query(sql, function(err, result) {
+        if (err) {
+            callback(msg.resultApi(403, err))
+        } else {
+            callback(msg.resultApi(200, result))
+        }
+    })
+    connect.end()
+}
 //最新热门
 function showHotList(params, callback) {
     let sql = 'select * from blog order by views desc limit ?,?';
@@ -280,5 +294,6 @@ module.exports = {
     showHotList,
     showTagBlogsTotal,
     showValBlogs,
-    showValBlogsTotal
+    showValBlogsTotal,
+    showList
 }

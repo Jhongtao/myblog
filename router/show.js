@@ -8,6 +8,15 @@ router.get("/everyday", function(req, res) {
         res.status(result.code).send(result.msg)
     })
 })
+router.get("/list", function(req, res) {
+    controlDb.showList(function(result) {
+        var bloglist = result.msg;
+        bloglist = bloglist.filter(function(ele) {
+            return ele.content = ele.content.replace(/<[^>]*>/g, '').substr(0, 200) + '...'
+        })
+        res.status(result.code).send(bloglist)
+    })
+})
 router.get("/bloglist", function(req, res) {
     let params = req.query
     controlDb.showBlogList({ page: parseInt(params.page), size: parseInt(params.size) }, function(result) {
