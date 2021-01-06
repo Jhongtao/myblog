@@ -4,6 +4,15 @@ const Detail = {
     },
     // name: "Detail",
     props: ['detail'],
+    methods: {
+        formatDate(time) {
+            var date = new Date(parseInt(time));
+            var year = date.getFullYear();
+            var mon = date.getMonth() + 1;
+            var day = date.getDate();
+            return year + '-' + mon + '-' + day;
+        },
+    },
     computed: {
         taglist() {
             if (this.detail.tags) {
@@ -21,7 +30,7 @@ const Detail = {
       分类: <a href="#" v-for="tag in taglist" rel="category tag">
       {{tag}}&nbsp&nbsp</a>
       </span>
-      <span class="meat_span">发布于: {{detail.ctime}}</span>
+      <span class="meat_span">发布于: {{formatDate(detail.ctime)}}</span>
        <span class="meat_span">浏览：{{detail.views}}</span>
         <span class="meat_span"><a href="#">没有评论</a></span> 
       </p>
@@ -34,6 +43,15 @@ const Detail = {
 const commentContent = {
     name: "commentContent",
     props: ['commentList'],
+    methods: {
+        formatDate(time) {
+            var date = new Date(parseInt(time));
+            var year = date.getFullYear();
+            var mon = date.getMonth() + 1;
+            var day = date.getDate();
+            return year + '-' + mon + '-' + day;
+        },
+    },
     template: `
     <div class="comment">
     <h3>关于这篇文章：目前有{{commentList.length}}条留言</h3>
@@ -41,7 +59,7 @@ const commentContent = {
         <div class="autor">
             <img src="./img/autor.jpg" alt="">
             <strong>{{comments.user_name}}</strong>
-            <span>{{comments.parent==-1?'发表于':'回复: '+comments.parent_name}} {{comments.ctime}}<a href="#comment_form" @click="$emit('parent-comment',{id:comments.id,user_name:comments.user_name})">"回复"</a></span>
+            <span>{{comments.parent==-1?'发表于':'回复: '+comments.parent_name}} {{formatDate(comments.ctime)}}<a href="#comment_form" @click="$emit('parent-comment',{id:comments.id,user_name:comments.user_name})">"回复"</a></span>
         </div>
         <p>{{comments.comments}}</p>
         <div class="children" style="display:none">
